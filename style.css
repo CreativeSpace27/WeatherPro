@@ -109,6 +109,7 @@ nav a:hover::after {
     flex-wrap: wrap;
     gap: clamp(6px, 1vw, 14px); /* responsive gap */
     padding: clamp(10px, 2vw, 20px);
+    position: relative; /* for autocomplete positioning */
 }
 
 /* Gradient background animation */
@@ -289,6 +290,7 @@ input:checked+.slider:before {
       border-color: var(--primary);
       box-shadow: 0 5px 15px rgba(0, 198, 255, 0.2);
 }
+.saved-city-btn:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
 
 .remove-city-btn {
       background: none;
@@ -445,6 +447,7 @@ main h2 {
       flex: 0 0 110px;
       text-align: center;
 }
+.hourly-item.good-hour { outline: 2px solid var(--success); box-shadow: 0 0 18px rgba(46, 204, 113, 0.35); }
 
 /* Apply glass-card in JS */
 .hourly-icon {
@@ -695,6 +698,7 @@ main h2 {
       border-color: var(--primary);
       box-shadow: 0 0 15px rgba(0, 198, 255, 0.3);
 }
+.map-btn:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
 
 /* "About WeatherPro" Section (REDESIGNED) */
 .about-section {
@@ -1015,3 +1019,96 @@ body.theme-night {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
 }
+
+/* ==== New UI for enhanced features ==== */
+/* Alerts banner */
+.alerts-banner {
+  max-width: 1200px;
+  margin: 1rem auto 0.5rem;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--warning);
+  background: rgba(243, 156, 18, 0.15);
+  border-radius: 10px;
+}
+.alerts-banner .alert-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.35rem 0;
+}
+.alerts-banner .alert-title { font-weight: 700; }
+.alerts-banner .alert-area { color: var(--text-secondary); font-size: 0.9rem; }
+.alerts-banner .alert-dismiss {
+  background: none; border: none; color: var(--text-light); font-size: 1.2rem; cursor: pointer;
+}
+
+/* Autocomplete */
+.autocomplete-list {
+  position: absolute;
+  z-index: 50;
+  background: rgba(20, 30, 40, 0.95);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  margin-top: 8px;
+  width: clamp(220px, 40vw, 340px);
+  max-height: 260px;
+  overflow: auto;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+}
+.ac-item { padding: 10px 12px; cursor: pointer; }
+.ac-item:hover { background: rgba(255, 255, 255, 0.06); }
+
+/* Hourly tabs and sparkline */
+.hourly-tabs { display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.hourly-sparkline { height: 80px; padding: 0 1rem; }
+.hourly-item .hourly-extra { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+
+/* Forecast actions */
+.forecast-actions { display: flex; justify-content: center; margin-top: 0.75rem; }
+
+/* History actions */
+.history-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.compare-panel { background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-radius: 12px; padding: 8px 12px; }
+.compare-cities-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-top: 6px; }
+.stale-badge { background: rgba(255,255,255,0.08); color: var(--warning); border: 1px solid var(--glass-border); border-radius: 999px; padding: 4px 10px; font-size: 0.85rem; }
+
+/* Suggestions */
+#suggestionsList { display: grid; gap: 8px; }
+.suggestion-item { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 10px 12px; }
+
+/* AQI breakdown */
+.aqi-breakdown { margin-top: 10px; font-size: 0.9rem; }
+.aqi-breakdown .aq-parts { color: var(--text-secondary); }
+
+/* Map enhancements */
+.opacity-label { color: var(--text-secondary); display: inline-flex; align-items: center; gap: 8px; }
+.map-search { display: inline-flex; align-items: center; gap: 6px; }
+.map-search input { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.06); color: var(--text-light); }
+.map-legend { margin-top: 8px; color: var(--text-secondary); font-size: 0.95rem; }
+
+/* Modal */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; z-index: 200; }
+.modal .modal-content { max-width: 560px; margin: 10vh auto; }
+.modal-header { display: flex; align-items: center; justify-content: space-between; }
+.modal-header .close-btn { background: none; border: none; color: var(--text-light); font-size: 1.4rem; cursor: pointer; }
+.modal-body { display: grid; gap: 12px; }
+.form-row { display: grid; gap: 8px; }
+.switch-label { display: inline-flex; align-items: center; gap: 8px; }
+.modal select, .modal input[type="number"], .modal input[type="text"] { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.08); color: var(--text-light); }
+
+/* Draggable saved cities visual cue */
+.saved-city-btn { user-select: none; }
+.saved-city-btn:active { transform: scale(0.98); opacity: 0.9; }
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+body.reduce-motion * { animation: none !important; transition: none !important; }

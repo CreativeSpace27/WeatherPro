@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>WeatherPro - Advanced Weather App</title>
+        <meta name="theme-color" content="#0f2027" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link rel="manifest" href="manifest.json" />
 </head>
 
 <body>
@@ -29,10 +31,12 @@
                 </label>
                 <span class="unit-label">°F</span>
             </div>
+            <button id="settingsBtn" class="neumorphic" aria-haspopup="dialog" aria-controls="settingsModal" title="Open settings"><i class="fas fa-gear"></i></button>
         </div>
     </header>
 
     <main>
+        <section id="alertsBanner" class="alerts-banner" aria-live="polite" aria-atomic="true" style="display:none;"></section>
         <section id="savedLocations" class="saved-locations-section" aria-label="Saved locations"></section>
 
         <section class="search-section" aria-label="Search for weather">
@@ -44,6 +48,8 @@
                 aria-label="Get weather for current location">
                 <i class="fas fa-location-arrow"></i>
             </button>
+            <div id="autocompleteList" class="autocomplete-list" role="listbox" aria-label="City suggestions" style="display:none;"></div>
+            <button id="shareLinkBtn" class="neumorphic" title="Copy shareable link" aria-label="Copy shareable link"><i class="fas fa-link"></i></button>
         </section>
 
         <section id="current" class="weather-display neumorphic" tabindex="0" aria-live="polite" aria-atomic="true"
@@ -52,40 +58,17 @@
         <!-- Hourly forecast cards -->
         <section id="hourly-forecast" class="hourly-forecast-display">
             <h2>Hourly Forecast</h2>
-            <div class="hourly-container" id="hourlyContainer">
-                <!-- Example hourly card -->
-                <div class="hourly-card">
-                    <h3>03:00</h3>
-                    <img src="icons/cloudy.png" alt="Cloudy">
-                    <p>72°F</p>
-                </div>
-                <div class="hourly-card">
-                    <h3>04:00</h3>
-                    <img src="icons/rain.png" alt="Rain">
-                    <p>72°F</p>
-                </div>
-                <!-- More cards will be generated dynamically -->
-            </div>
+            <div class="hourly-tabs" id="hourlyTabs" role="tablist" aria-label="Select day for hourly forecast"></div>
+            <div class="hourly-container" id="hourlyContainer"></div>
+            <div class="hourly-sparkline"><canvas id="hourlySparkline" height="80"></canvas></div>
         </section>
 
         <!-- Daily forecast cards -->
         <section id="forecast" class="forecast-display">
             <h2>Daily Forecast</h2>
-            <div class="forecast-container" id="forecastContainer">
-                <!-- Example daily card -->
-                <div class="forecast-card">
-                    <h3>Sat</h3>
-                    <img src="icons/rain.png" alt="Moderate rain">
-                    <p>81°F / 72°F</p>
-                    <p>Moderate rain</p>
-                </div>
-                <div class="forecast-card">
-                    <h3>Sun</h3>
-                    <img src="icons/sun-rain.png" alt="Patchy rain nearby">
-                    <p>82°F / 71°F</p>
-                    <p>Patchy rain nearby</p>
-                </div>
-                <!-- More cards will be generated dynamically -->
+            <div class="forecast-container" id="forecastContainer"></div>
+            <div class="forecast-actions">
+                <button id="moreDaysBtn" class="neumorphic" aria-label="Load extended forecast">More days</button>
             </div>
         </section>
 
@@ -94,6 +77,16 @@
             <h2>Weather History (7 days)</h2>
             <canvas id="historyChart" height="220"></canvas>
             <div id="historyError" style="display:none; color: var(--danger); text-align:center; margin-top:8px;"></div>
+            <div class="history-actions">
+                <button id="compareToggleBtn" class="neumorphic" aria-expanded="false">Compare cities</button>
+                <div id="comparePanel" class="compare-panel" style="display:none;">
+                    <div id="compareCitiesList" class="compare-cities-list" aria-label="Select cities to compare"></div>
+                    <button id="applyCompareBtn" class="neumorphic">Apply</button>
+                </div>
+                <button id="exportCsvBtn" class="neumorphic">Export CSV</button>
+                <button id="shareImageBtn" class="neumorphic">Share image</button>
+                <span id="staleBadge" class="stale-badge" style="display:none;" title="Showing cached data">Stale</span>
+            </div>
         </section>
 
         <section id="lifestyle-section" class="lifestyle-container">
@@ -105,6 +98,10 @@
                 <h2>Allergies</h2>
                 <div class="allergies-grid"></div>
             </div>
+            <div id="suggestions-section" class="neumorphic">
+                <h2>Suggestions</h2>
+                <div id="suggestionsList"></div>
+            </div>
         </section>
 
         <section id="map-section" class="map-container neumorphic">
@@ -113,8 +110,14 @@
                 <button class="map-btn neumorphic active" data-layer="rain">Radar</button>
                 <button class="map-btn neumorphic" data-layer="clouds">Clouds</button>
                 <button class="map-btn neumorphic" data-layer="temp">Temperature</button>
+                <label class="opacity-label">Opacity <input type="range" id="layerOpacity" min="0" max="1" step="0.05" value="0.7" /></label>
+                <div class="map-search">
+                    <input type="text" id="mapSearchInput" placeholder="Search on map" aria-label="Map search" />
+                    <button id="mapSearchBtn" class="neumorphic" aria-label="Search on map"><i class="fas fa-search"></i></button>
+                </div>
             </div>
             <div id="windy-map"></div>
+            <div id="mapLegend" class="map-legend" aria-live="polite"></div>
         </section>
 
         <section id="about" class="about-section neumorphic" tabindex="0">
@@ -150,6 +153,45 @@
     <!-- Global weather animations overlay -->
     <div id="weather-anim" aria-hidden="true"></div>
 
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" style="display:none;">
+        <div class="modal-content neumorphic">
+            <div class="modal-header">
+                <h3 id="settingsTitle">Settings</h3>
+                <button id="closeSettingsBtn" aria-label="Close settings" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <label for="langSelect">Language</label>
+                    <select id="langSelect">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label class="switch-label"><input type="checkbox" id="reduceMotionToggle" /> Reduce motion</label>
+                </div>
+                <div class="form-row">
+                    <strong>Notifications</strong>
+                    <label class="switch-label"><input type="checkbox" id="notifyRainToggle" /> Rain soon</label>
+                    <label class="switch-label"><input type="checkbox" id="notifyUvToggle" /> High UV</label>
+                </div>
+                <div class="form-row">
+                    <strong>Activity preferences</strong>
+                    <label>Comfort temp min <input type="number" id="prefTempMin" value="10" /></label>
+                    <label>Comfort temp max <input type="number" id="prefTempMax" value="30" /></label>
+                    <label>Max wind (kph) <input type="number" id="prefMaxWind" value="25" /></label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveSettingsBtn" class="neumorphic">Save</button>
+            </div>
+        </div>
+    </div>
+
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -163,7 +205,15 @@
         defer
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
     <script src="script.js" defer></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js').catch(() => {});
+        });
+      }
+    </script>
 </body>
 
 </html>
