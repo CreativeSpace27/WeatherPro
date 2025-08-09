@@ -55,6 +55,12 @@
         <section id="current" class="weather-display neumorphic" tabindex="0" aria-live="polite" aria-atomic="true"
             aria-label="Current weather information"></section>
 
+        <!-- Hindi Panchang (Tithi / Month / Year) -->
+        <section id="panchang-section" class="neumorphic" aria-label="Hindi Panchang">
+            <h2>हिन्दी पंचांग</h2>
+            <div id="panchangContent" class="panchang-grid" aria-live="polite"></div>
+        </section>
+
         <!-- Hourly forecast cards -->
         <section id="hourly-forecast" class="hourly-forecast-display">
             <h2>Hourly Forecast</h2>
@@ -204,6 +210,8 @@
         crossorigin=""
         defer
     ></script>
+    <!-- SunCalc for moon phase/tithi calculations -->
+    <script src="https://unpkg.com/suncalc@1.9.0/suncalc.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
     <script src="script.js" defer></script>

@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefMaxWind = document.getElementById('prefMaxWind');
   const notifyRainToggle = document.getElementById('notifyRainToggle');
   const notifyUvToggle = document.getElementById('notifyUvToggle');
+  const panchangContent = document.getElementById('panchangContent');
 
   // --- APP STATE ---
   let currentUnit = localStorage.getItem("unit") || "metric";
@@ -218,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateAllDisplays() {
       if (!currentWeatherData) return;
       displayCurrent(currentWeatherData);
+      renderPanchang(currentWeatherData);
       buildHourlyTabs(currentWeatherData);
       displayHourlyForecast(currentWeatherData, selectedHourlyDayIndex);
       displayDailyForecast(currentWeatherData);
@@ -264,6 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
       weatherDisplay.innerHTML = `
           <p class="city-name">${location.name}, ${location.country}</p>
           <img class="weather-icon" src="https:${current.condition.icon}" alt="${current.condition.text}">
+          <div id="moonEmoji" class="moon-phase-emoji" aria-label="Moon phase" title=""></div>
           <p class="temp">${Math.round(temp)}${tempUnit}</p>
           <p class="description">${current.condition.text}</p>
           <div class="weather-details">
@@ -284,11 +287,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Trigger weather animations based on condition
       if (!reduceMotion && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        applyWeatherAnimation(current.condition.code, current.condition.text);
+        applyWeatherAnimation(
+          current.condition.code,
+          current.condition.text,
+          current.is_day,
+          current.wind_kph || 0,
+          current.temp_c,
+          current.uv
+        );
       } else {
         clearAnimations();
       }
       applyWeatherTheme(current);
+      updateMoonEmoji(location);
   }
 
   function renderAqiBreakdown(aq) {
@@ -567,33 +578,59 @@ document.addEventListener('DOMContentLoaded', () => {
       container.innerHTML = '';
   }
 
-  function applyWeatherAnimation(conditionCode, conditionText) {
+  function applyWeatherAnimation(conditionCode, conditionText, isDayFlag, windKph, tempC, uvi) {
       const container = document.getElementById('weather-anim');
       if (!container) return;
       clearAnimations();
       const text = (conditionText || '').toLowerCase();
+      const isNight = !isDayFlag || document.body.classList.contains('theme-night');
+
+      // Night sky stars overlay
+      if (isNight) {
+          spawnStars(container);
+      }
+
+      // UV glow on very high UV during day
+      if (!isNight && (uvi || 0) >= 8) {
+          spawnUVGlow(container);
+      }
 
       if (text.includes('thunder')) {
           // Lightning flashes
           const flash = document.createElement('div');
           flash.className = 'lightning';
           container.appendChild(flash);
-          return;
       }
 
       if (text.includes('snow') || text.includes('blizzard')) {
           spawnSnow(container);
-          return;
       }
 
       if (text.includes('rain') || text.includes('drizzle') || text.includes('shower')) {
           spawnRain(container);
-          return;
+      }
+
+      if (text.includes('fog') || text.includes('mist') || text.includes('haze') || text.includes('smoke')) {
+          spawnFog(container);
+      }
+
+      if (text.includes('cloud')) {
+          spawnClouds(container, 4 + Math.floor(Math.random() * 3));
       }
 
       if (text.includes('sun') || text.includes('clear')) {
           spawnSunny(container);
-          return;
+      }
+
+      // Wind overlay when winds are strong
+      const windy = (windKph || 0) >= 25 || text.includes('wind');
+      if (windy) {
+          spawnWind(container, Math.min(Math.max(Math.round((windKph || 0) / 10), 2), 10));
+      }
+
+      // Heat shimmer for hot days
+      if (!isNight && (tempC || 0) >= 35 && !text.includes('rain')) {
+          spawnHeatHaze(container);
       }
   }
 
@@ -639,6 +676,83 @@ document.addEventListener('DOMContentLoaded', () => {
           cl.style.top = `${10 + Math.random() * 25}vh`;
           cl.style.animationDuration = `${24 + Math.random() * 16}s`;
           cl.style.opacity = `${0.6 + Math.random() * 0.3}`;
+          container.appendChild(cl);
+      }
+  }
+
+  function spawnStars(container) {
+      const starCount = 120;
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < starCount; i += 1) {
+          const s = document.createElement('div');
+          s.className = 'star';
+          const size = Math.random() < 0.8 ? (Math.random() * 1.8 + 0.7) : (Math.random() * 2.4 + 1.2);
+          s.style.left = `${Math.random() * 100}vw`;
+          s.style.top = `${Math.random() * 100}vh`;
+          s.style.width = `${size}px`;
+          s.style.height = `${size}px`;
+          s.style.animationDuration = `${4 + Math.random() * 6}s, ${12 + Math.random() * 18}s`;
+          s.style.animationDelay = `${Math.random() * 6}s, ${Math.random() * 10}s`;
+          frag.appendChild(s);
+      }
+      container.appendChild(frag);
+  }
+
+  function spawnWind(container, intensity = 4) {
+      const streaks = intensity * 10; // 20..100
+      const frag = document.createDocumentFragment();
+      for (let i = 0; i < streaks; i += 1) {
+          const w = document.createElement('div');
+          w.className = 'wind-streak';
+          const top = Math.random() * 100; // vh
+          const len = 30 + Math.random() * 140; // px
+          const dur = 2.5 + Math.random() * (6 - intensity * 0.3);
+          const delay = Math.random() * 5;
+          const tilt = (Math.random() * 10) - 5;
+          w.style.top = `${top}vh`;
+          w.style.width = `${len}px`;
+          w.style.animationDuration = `${Math.max(1.2, dur)}s`;
+          w.style.animationDelay = `${delay}s`;
+          w.style.transform = `rotate(${tilt}deg)`;
+          frag.appendChild(w);
+      }
+      container.appendChild(frag);
+  }
+
+  function spawnFog(container) {
+      const layers = 3;
+      for (let i = 0; i < layers; i += 1) {
+          const fog = document.createElement('div');
+          fog.className = 'fog-layer';
+          const opacity = 0.10 + i * 0.08 + Math.random() * 0.05;
+          const dur = 35 + i * 12 + Math.random() * 10;
+          const top = 5 + i * 25 + Math.random() * 10; // vh
+          fog.style.opacity = String(opacity);
+          fog.style.animationDuration = `${dur}s`;
+          fog.style.top = `${top}vh`;
+          container.appendChild(fog);
+      }
+  }
+
+  function spawnHeatHaze(container) {
+      const haze = document.createElement('div');
+      haze.className = 'heat-haze';
+      container.appendChild(haze);
+  }
+
+  function spawnUVGlow(container) {
+      const glow = document.createElement('div');
+      glow.className = 'uv-glow';
+      container.appendChild(glow);
+  }
+
+  function spawnClouds(container, count = 5) {
+      for (let i = 0; i < count; i += 1) {
+          const cl = document.createElement('div');
+          cl.className = 'cloud cloud-dense';
+          cl.style.top = `${10 + Math.random() * 50}vh`;
+          cl.style.animationDuration = `${28 + Math.random() * 24}s`;
+          cl.style.opacity = `${0.75 + Math.random() * 0.2}`;
           container.appendChild(cl);
       }
   }
@@ -748,6 +862,102 @@ document.addEventListener('DOMContentLoaded', () => {
   function getAllergyRating(weatherData) { const aqi = weatherData.current.air_quality['us-epa-index']; if (aqi >= 3 && aqi <= 4) return { level: 'Moderate', class: 'rating-fair' }; if (aqi > 4) return { level: 'High', class: 'rating-bad' }; return { level: 'Low', class: 'rating-good' }; }
   function computeDewPointC(tempC, humidityPct) { const a=17.62,b=243.12; const gamma=(a*tempC)/(b+tempC)+Math.log(humidityPct/100); const dew=(b*gamma)/(a-gamma); return Math.round(dew*10)/10; }
   function getPressureTrend(data) { try { const hours=data.forecast.forecastday[0].hour; const now=Math.floor(Date.now()/1000); let closestIdx=0,minDiff=Infinity; for (let i=0;i<hours.length;i+=1){ const diff=Math.abs(hours[i].time_epoch-now); if (diff<minDiff){minDiff=diff; closestIdx=i;} } const curr=hours[closestIdx].pressure_mb||0; const prevIdx=Math.max(0,closestIdx-3); const prev=hours[prevIdx].pressure_mb||0; const delta=Math.round((curr-prev)*10)/10; if (delta>0.5) return {label:`Rising ${delta} mb`, symbol:'↗'}; if (delta<-0.5) return {label:`Falling ${Math.abs(delta)} mb`, symbol:'↘'}; return {label:'Steady', symbol:'→'}; } catch { return {label:'', symbol:''}; } }
+
+  // --- MOON PHASE EMOJI (real-time lunar cycle) ---
+  function updateMoonEmoji(location) {
+      const el = document.getElementById('moonEmoji');
+      if (!el) return;
+      try {
+          const dt = (location && location.localtime_epoch) ? new Date(location.localtime_epoch * 1000) : new Date();
+          const illum = (window.SunCalc && SunCalc.getMoonIllumination(dt)) || { phase: 0, fraction: 0 };
+          const { emoji, label } = getMoonEmojiFromPhase(illum.phase);
+          const percent = Math.round((illum.fraction || 0) * 100);
+          el.textContent = emoji;
+          el.title = `${label} • ${percent}% illuminated`;
+          el.setAttribute('aria-label', `${label}, ${percent}% illuminated`);
+      } catch {
+          el.textContent = '';
+      }
+  }
+
+  function getMoonEmojiFromPhase(phase) {
+      // phase: 0..1; 0=new, 0.5=full, increasing is waxing
+      const epsilon = 0.04;
+      if (phase < epsilon || phase > 1 - epsilon) return { emoji: '🌑', label: 'New Moon' };
+      if (Math.abs(phase - 0.25) <= epsilon) return { emoji: '🌓', label: 'First Quarter' };
+      if (Math.abs(phase - 0.5) <= epsilon) return { emoji: '🌕', label: 'Full Moon' };
+      if (Math.abs(phase - 0.75) <= epsilon) return { emoji: '🌗', label: 'Last Quarter' };
+      if (phase > 0 && phase < 0.25) return { emoji: '🌒', label: 'Waxing Crescent' };
+      if (phase > 0.25 && phase < 0.5) return { emoji: '🌔', label: 'Waxing Gibbous' };
+      if (phase > 0.5 && phase < 0.75) return { emoji: '🌖', label: 'Waning Gibbous' };
+      return { emoji: '🌘', label: 'Waning Crescent' };
+  }
+
+  // --- PANCHANG (Approximate Hindi Calendar) ---
+  function renderPanchang(data) {
+      if (!panchangContent) return;
+      const date = new Date(((data && data.location && data.location.localtime_epoch) ? data.location.localtime_epoch * 1000 : Date.now()));
+      const tithiObj = computeApproxTithi(date);
+      const hindiMonth = getHindiMonthApprox(date);
+      const vikramYear = getVikramSamvatYear(date);
+      panchangContent.innerHTML = `
+        <div class="panchang-item"><span class="panchang-label">तिथि</span><span class="panchang-value">${tithiObj.name} (${tithiObj.paksha})</span></div>
+        <div class="panchang-item"><span class="panchang-label">हिंदी माह</span><span class="panchang-value">${hindiMonth}</span></div>
+        <div class="panchang-item"><span class="panchang-label">विक्रम संवत</span><span class="panchang-value">${vikramYear}</span></div>
+      `;
+  }
+
+  function computeApproxTithi(date) {
+      try {
+          const phase = (window.SunCalc && SunCalc.getMoonIllumination(date).phase) || 0; // 0..1
+          let tithiNum = Math.floor(phase * 30) + 1; // 1..30
+          if (tithiNum > 30) tithiNum = 30;
+          const paksha = phase < 0.5 ? 'शुक्ल पक्ष' : 'कृष्ण पक्ष';
+          const name = getTithiNameFromNumber(tithiNum, paksha);
+          return { number: tithiNum, paksha, name };
+      } catch {
+          return { number: null, paksha: '-', name: '—' };
+      }
+  }
+
+  function getTithiNameFromNumber(tithiNum, paksha) {
+      const baseNames = ['प्रतिपदा','द्वितीया','तृतीया','चतुर्थी','पंचमी','षष्ठी','सप्तमी','अष्टमी','नवमी','दशमी','एकादशी','द्वादशी','त्रयोदशी','चतुर्दशी'];
+      if (tithiNum === 15) return 'पूर्णिमा';
+      if (tithiNum === 30) return 'अमावस्या';
+      const idx = (tithiNum - 1) % 15; // 0..13
+      return baseNames[idx] + (idx === 13 ? '' : '');
+  }
+
+  function getHindiMonthApprox(date) {
+      const d = date.getDate();
+      const m = date.getMonth(); // 0=Jan
+      // Rough Purnimanta mapping by date ranges (approx.)
+      // Magha ~ Jan 14 - Feb 12, Phalguna ~ Feb 13 - Mar 14, Chaitra ~ Mar 15 - Apr 13, Vaishakh ~ Apr 14 - May 14,
+      // Jyeshtha ~ May 15 - Jun 14, Ashadha ~ Jun 15 - Jul 15, Shravana ~ Jul 16 - Aug 15, Bhadrapada ~ Aug 16 - Sep 15,
+      // Ashwin ~ Sep 16 - Oct 16, Kartik ~ Oct 17 - Nov 15, Margashirsha ~ Nov 16 - Dec 15, Pausha ~ Dec 16 - Jan 13
+      const names = ['माघ','फाल्गुन','चैत्र','वैशाख','ज्येष्ठ','आषाढ़','श्रावण','भाद्रपद','आश्विन','कार्तिक','मार्गशीर्ष','पौष'];
+      // Determine by month/day
+      if (m === 0) return d < 14 ? 'पौष' : 'माघ';
+      if (m === 1) return d < 13 ? 'माघ' : 'फाल्गुन';
+      if (m === 2) return d < 15 ? 'फाल्गुन' : 'चैत्र';
+      if (m === 3) return d < 14 ? 'चैत्र' : 'वैशाख';
+      if (m === 4) return d < 15 ? 'वैशाख' : 'ज्येष्ठ';
+      if (m === 5) return d < 15 ? 'ज्येष्ठ' : 'आषाढ़';
+      if (m === 6) return d < 16 ? 'आषाढ़' : 'श्रावण';
+      if (m === 7) return d < 16 ? 'श्रावण' : 'भाद्रपद';
+      if (m === 8) return d < 16 ? 'भाद्रपद' : 'आश्विन';
+      if (m === 9) return d < 17 ? 'आश्विन' : 'कार्तिक';
+      if (m === 10) return d < 16 ? 'कार्तिक' : 'मार्गशीर्ष';
+      // m === 11
+      return d < 16 ? 'मार्गशीर्ष' : 'पौष';
+  }
+
+  function getVikramSamvatYear(date) {
+      const m = date.getMonth(); // 0=Jan
+      // VS increments around mid-April (Chaitra Shukla Pratipada). Approx: before April -> year+57, from April onwards -> year+58
+      const gregYear = date.getFullYear();
+      return (m < 3) ? (gregYear + 57) : (gregYear + 58);
+  }
 
   function displayAlerts(data) {
       if (!alertsBanner) return;
