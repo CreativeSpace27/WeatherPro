@@ -141,94 +141,92 @@
 ## 🎯 Key Features Deep Dive
 
 ### 🌪️ **Weather Animations**
-Experience dynamic weather animations that respond to current conditions:
+The app features dynamic weather animations that respond to current conditions:
 
-<div align="center">
+<div align="center" style="margin: 20px 0;">
+  <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+    <!-- Rain Animation -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 20px; border-radius: 15px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+      <div style="color: #00c6ff; font-size: 24px; margin-bottom: 10px;">🌧️ Rain Effect</div>
+      <div style="height: 60px; width: 100px; position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, #0f2027, #203a43);">
+        <div style="position: absolute; top: -10px; left: 10px; width: 2px; height: 20px; background: #00c6ff; animation: fall 1s linear infinite;"></div>
+        <div style="position: absolute; top: -15px; left: 30px; width: 2px; height: 15px; background: #00c6ff; animation: fall 1.2s linear infinite;"></div>
+        <div style="position: absolute; top: -20px; left: 50px; width: 2px; height: 18px; background: #00c6ff; animation: fall 0.8s linear infinite;"></div>
+        <div style="position: absolute; top: -12px; left: 70px; width: 2px; height: 16px; background: #00c6ff; animation: fall 1.1s linear infinite;"></div>
+      </div>
+    </div>
 
-| 🌧️ **Rain Effect** | ❄️ **Snow Effect** | ⚡ **Lightning** |
-|:---:|:---:|:---:|
-| 🌧️🌧️🌧️🌧️🌧️ | ❄️❄️❄️❄️❄️ | ⚡⚡⚡⚡⚡ |
-| 🌧️🌧️🌧️🌧️🌧️ | ❄️❄️❄️❄️❄️ | ⚡⚡⚡⚡⚡ |
-| 🌧️🌧️🌧️🌧️🌧️ | ❄️❄️❄️❄️❄️ | ⚡⚡⚡⚡⚡ |
+    <!-- Snow Animation -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 20px; border-radius: 15px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+      <div style="color: #f0f2f5; font-size: 24px; margin-bottom: 10px;">❄️ Snow Effect</div>
+      <div style="height: 60px; width: 100px; position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, #0f2027, #203a43);">
+        <div style="position: absolute; top: -10px; left: 15px; font-size: 12px; color: white; animation: snow 3s linear infinite;">❄</div>
+        <div style="position: absolute; top: -20px; left: 35px; font-size: 10px; color: white; animation: snow 2.5s linear infinite;">❄</div>
+        <div style="position: absolute; top: -15px; left: 55px; font-size: 14px; color: white; animation: snow 3.5s linear infinite;">❄</div>
+        <div style="position: absolute; top: -25px; left: 75px; font-size: 11px; color: white; animation: snow 2.8s linear infinite;">❄</div>
+      </div>
+    </div>
 
-*Animated raindrops, rotating snowflakes, and flashing lightning effects*
-
+    <!-- Lightning Animation -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 20px; border-radius: 15px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+      <div style="color: #f09819; font-size: 24px; margin-bottom: 10px;">⚡ Lightning</div>
+      <div style="height: 60px; width: 100px; position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, #0f2027, #203a43);">
+        <div style="position: absolute; top: 10px; left: 50px; font-size: 30px; color: #f09819; animation: flash 2s ease-in-out infinite;">⚡</div>
+      </div>
+    </div>
+  </div>
 </div>
 
-**Animation Features:**
-- **🌧️ Rain**: Animated blue raindrops falling with varying speeds and opacity
-- **❄️ Snow**: Rotating snowflakes with different sizes and drift patterns  
-- **⚡ Lightning**: Pulsing lightning bolts with flash effects and scaling
-- **☀️ Sunny**: Glowing sun with pulsing animation and heat waves
-- **🌪️ Wind**: Animated wind streaks and cloud movement
-- **🌫️ Fog**: Drifting fog layers with opacity changes
+<style>
+@keyframes fall {
+  0% { transform: translateY(-20px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(80px); opacity: 0; }
+}
+
+@keyframes snow {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(80px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes flash {
+  0%, 90%, 100% { opacity: 0; transform: scale(1); }
+  5%, 85% { opacity: 1; transform: scale(1.2); }
+}
+</style>
 
 ### 📈 **Interactive Charts**
 Powered by Chart.js for beautiful data visualization:
 
-<div align="center">
-
-| 📊 **Temperature Trend** |
-|:---:|
-| ████████████████████████ |
-| ████████████████████████ |
-| ████████████████████████ |
-| ████████████████████████ |
-| ████████████████████████ |
-
-*7-day historical data with interactive hover effects*
-
-</div>
-
-**Chart Features:**
-- **Temperature Trends**: 7-day historical data visualization
-- **Precipitation Patterns**: Hourly rainfall predictions  
+- **Temperature Trends**: 7-day historical data
+- **Precipitation Patterns**: Hourly rainfall predictions
 - **Wind Speed Analysis**: Gust and average wind speeds
 - **Multi-city Comparison**: Side-by-side weather analysis
-- **Export Options**: CSV data export and image sharing
 
 ### 🗺️ **Advanced Mapping**
 Integrated Leaflet.js with OpenWeatherMap tiles:
 
-<div align="center">
-
-| 🗺️ **Weather Map Layers** |
-|:---:|
-| 🌧️ **Radar** - Real-time precipitation |
-| ☁️ **Clouds** - Cloud coverage visualization |
-| 🌡️ **Temperature** - Heat map display |
-| 🎛️ **Controls** - Layer switching & opacity |
-
-</div>
-
-**Map Features:**
 - **Radar Layer**: Real-time precipitation radar
 - **Cloud Layer**: Cloud coverage visualization
 - **Temperature Layer**: Heat map temperature display
 - **Interactive Controls**: Layer switching and opacity adjustment
-- **Search Functionality**: Location search on map
 
 ### 🎨 **Neumorphic Design**
 Modern glass morphism with depth and shadows:
 
-<div align="center">
-
-| 🎨 **Design Elements** |
-|:---:|
-| 🌤️ **Weather Card** - Hover effects |
-| ☀️ **Sunny Day** - Pulsing animation |
-| 🌱 **Fresh Air** - Shimmer effect |
-
-*Glass morphism with backdrop blur and subtle shadows*
-
-</div>
-
-**Design Features:**
-- **Glass Morphism**: Modern glass-like interface elements
-- **Hover Effects**: Interactive card animations
-- **Theme Adaptation**: Automatic theme changes based on weather
-- **Accessibility**: Full ARIA support and keyboard navigation
-- **Responsive**: Mobile-first design approach
+```css
+.neumorphic {
+  background: rgba(15, 32, 39, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+```
 
 ---
 
