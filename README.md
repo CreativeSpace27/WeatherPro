@@ -166,103 +166,69 @@ Experience dynamic weather animations that respond to current conditions:
 ### 📈 **Interactive Charts**
 Powered by Chart.js for beautiful data visualization:
 
-<div align="center" style="margin: 20px 0;">
-  <div style="background: rgba(15, 32, 39, 0.8); padding: 30px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); max-width: 600px; margin: 0 auto;">
-    <div style="color: #00c6ff; font-size: 24px; margin-bottom: 20px;">📊 Temperature Trend</div>
-    
-    <!-- Animated Chart Bars -->
-    <div style="display: flex; align-items: end; justify-content: center; gap: 8px; height: 120px; margin-bottom: 20px;">
-      <div style="width: 30px; background: linear-gradient(to top, #00c6ff, #0072ff); border-radius: 4px 4px 0 0; animation: chartBar1 2s ease-out infinite;"></div>
-      <div style="width: 30px; background: linear-gradient(to top, #f09819, #edde5d); border-radius: 4px 4px 0 0; animation: chartBar2 2s ease-out infinite;"></div>
-      <div style="width: 30px; background: linear-gradient(to top, #2ecc71, #27ae60); border-radius: 4px 4px 0 0; animation: chartBar3 2s ease-out infinite;"></div>
-      <div style="width: 30px; background: linear-gradient(to top, #e74c3c, #c0392b); border-radius: 4px 4px 0 0; animation: chartBar4 2s ease-out infinite;"></div>
-      <div style="width: 30px; background: linear-gradient(to top, #9b59b6, #8e44ad); border-radius: 4px 4px 0 0; animation: chartBar5 2s ease-out infinite;"></div>
-      <div style="width: 30px; background: linear-gradient(to top, #00c6ff, #0072ff); border-radius: 4px 4px 0 0; animation: chartBar6 2s ease-out infinite;"></div>
-      <div style="width: 30px; background: linear-gradient(to top, #f09819, #edde5d); border-radius: 4px 4px 0 0; animation: chartBar7 2s ease-out infinite;"></div>
-    </div>
-    
-    <!-- Chart Labels -->
-    <div style="display: flex; justify-content: space-between; color: #a7b4c2; font-size: 12px;">
-      <span>Mon</span>
-      <span>Tue</span>
-      <span>Wed</span>
-      <span>Thu</span>
-      <span>Fri</span>
-      <span>Sat</span>
-      <span>Sun</span>
-    </div>
-    
-    <div style="margin-top: 15px; color: #f0f2f5; font-size: 14px;">
-      <span style="color: #00c6ff;">●</span> Temperature | 
-      <span style="color: #f09819;">●</span> Precipitation | 
-      <span style="color: #2ecc71;">●</span> Wind Speed
-    </div>
-  </div>
+<div align="center">
+
+| 📊 **Temperature Trend** |
+|:---:|
+| ████████████████████████ |
+| ████████████████████████ |
+| ████████████████████████ |
+| ████████████████████████ |
+| ████████████████████████ |
+
+*7-day historical data with interactive hover effects*
+
 </div>
 
-<style>
-@keyframes chartBar1 { 0% { height: 0; } 100% { height: 60px; } }
-@keyframes chartBar2 { 0% { height: 0; } 100% { height: 80px; } }
-@keyframes chartBar3 { 0% { height: 0; } 100% { height: 45px; } }
-@keyframes chartBar4 { 0% { height: 0; } 100% { height: 95px; } }
-@keyframes chartBar5 { 0% { height: 0; } 100% { height: 70px; } }
-@keyframes chartBar6 { 0% { height: 0; } 100% { height: 55px; } }
-@keyframes chartBar7 { 0% { height: 0; } 100% { height: 85px; } }
-</style>
-
-- **Temperature Trends**: 7-day historical data
+**Chart Features:**
+- **Temperature Trends**: 7-day historical data visualization
 - **Precipitation Patterns**: Hourly rainfall predictions  
 - **Wind Speed Analysis**: Gust and average wind speeds
 - **Multi-city Comparison**: Side-by-side weather analysis
+- **Export Options**: CSV data export and image sharing
 
 ### 🗺️ **Advanced Mapping**
 Integrated Leaflet.js with OpenWeatherMap tiles:
 
+<div align="center">
+
+| 🗺️ **Weather Map Layers** |
+|:---:|
+| 🌧️ **Radar** - Real-time precipitation |
+| ☁️ **Clouds** - Cloud coverage visualization |
+| 🌡️ **Temperature** - Heat map display |
+| 🎛️ **Controls** - Layer switching & opacity |
+
+</div>
+
+**Map Features:**
 - **Radar Layer**: Real-time precipitation radar
 - **Cloud Layer**: Cloud coverage visualization
 - **Temperature Layer**: Heat map temperature display
 - **Interactive Controls**: Layer switching and opacity adjustment
+- **Search Functionality**: Location search on map
 
 ### 🎨 **Neumorphic Design**
 Modern glass morphism with depth and shadows:
 
-<div align="center" style="margin: 20px 0;">
-  <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-    <!-- Interactive Neumorphic Card -->
-    <div style="background: rgba(15, 32, 39, 0.8); padding: 25px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'">
-      <div style="color: #00c6ff; font-size: 28px; margin-bottom: 10px;">🌤️</div>
-      <div style="color: #f0f2f5; font-weight: bold; margin-bottom: 5px;">Weather Card</div>
-      <div style="color: #a7b4c2; font-size: 14px;">Hover to see effect</div>
-    </div>
+<div align="center">
 
-    <!-- Animated Weather Icon -->
-    <div style="background: rgba(15, 32, 39, 0.8); padding: 25px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);">
-      <div style="color: #f09819; font-size: 32px; margin-bottom: 10px; animation: pulse 2s ease-in-out infinite;">☀️</div>
-      <div style="color: #f0f2f5; font-weight: bold; margin-bottom: 5px;">Sunny Day</div>
-      <div style="color: #a7b4c2; font-size: 14px;">Pulsing animation</div>
-    </div>
+| 🎨 **Design Elements** |
+|:---:|
+| 🌤️ **Weather Card** - Hover effects |
+| ☀️ **Sunny Day** - Pulsing animation |
+| 🌱 **Fresh Air** - Shimmer effect |
 
-    <!-- Glass Effect Demo -->
-    <div style="background: rgba(15, 32, 39, 0.8); padding: 25px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); position: relative; overflow: hidden;">
-      <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); animation: shimmer 3s ease-in-out infinite;"></div>
-      <div style="color: #2ecc71; font-size: 28px; margin-bottom: 10px; position: relative; z-index: 1;">🌱</div>
-      <div style="color: #f0f2f5; font-weight: bold; margin-bottom: 5px; position: relative; z-index: 1;">Fresh Air</div>
-      <div style="color: #a7b4c2; font-size: 14px; position: relative; z-index: 1;">Shimmer effect</div>
-    </div>
-  </div>
+*Glass morphism with backdrop blur and subtle shadows*
+
 </div>
 
-<style>
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-}
-
-@keyframes shimmer {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-}
-</style>
+**Design Features:**
+- **Glass Morphism**: Modern glass-like interface elements
+- **Hover Effects**: Interactive card animations
+- **Theme Adaptation**: Automatic theme changes based on weather
+- **Accessibility**: Full ARIA support and keyboard navigation
+- **Responsive**: Mobile-first design approach
 
 ---
 
