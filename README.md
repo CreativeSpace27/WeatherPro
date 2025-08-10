@@ -23,14 +23,6 @@ It provides **real-time weather updates**, forecasts, and detailed climate infor
 
 ---
 
-## 📸 Screenshots  
-
-| 🌤️ Home Screen | 🌧️ Rainy Day | ❄️ Snow Forecast |
-|----------------|-------------|-----------------|
-| ![Home](assets/home.png) | ![Rain](assets/rain.png) | ![Snow](assets/snow.png) |
-
----
-
 ## 🚀 How to Use  
 
 1. **Clone the Repository** 📂  
