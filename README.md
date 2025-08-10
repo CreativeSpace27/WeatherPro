@@ -143,28 +143,110 @@
 ### 🌪️ **Weather Animations**
 The app features dynamic weather animations that respond to current conditions:
 
-```css
-/* Rain Animation */
-.rain-drop {
-  animation: fall 1s linear infinite;
+<div align="center" style="margin: 20px 0;">
+  <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+    <!-- Rain Animation -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 20px; border-radius: 15px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+      <div style="color: #00c6ff; font-size: 24px; margin-bottom: 10px;">🌧️ Rain Effect</div>
+      <div style="height: 60px; width: 100px; position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, #0f2027, #203a43);">
+        <div style="position: absolute; top: -10px; left: 10px; width: 2px; height: 20px; background: #00c6ff; animation: fall 1s linear infinite;"></div>
+        <div style="position: absolute; top: -15px; left: 30px; width: 2px; height: 15px; background: #00c6ff; animation: fall 1.2s linear infinite;"></div>
+        <div style="position: absolute; top: -20px; left: 50px; width: 2px; height: 18px; background: #00c6ff; animation: fall 0.8s linear infinite;"></div>
+        <div style="position: absolute; top: -12px; left: 70px; width: 2px; height: 16px; background: #00c6ff; animation: fall 1.1s linear infinite;"></div>
+      </div>
+    </div>
+
+    <!-- Snow Animation -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 20px; border-radius: 15px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+      <div style="color: #f0f2f5; font-size: 24px; margin-bottom: 10px;">❄️ Snow Effect</div>
+      <div style="height: 60px; width: 100px; position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, #0f2027, #203a43);">
+        <div style="position: absolute; top: -10px; left: 15px; font-size: 12px; color: white; animation: snow 3s linear infinite;">❄</div>
+        <div style="position: absolute; top: -20px; left: 35px; font-size: 10px; color: white; animation: snow 2.5s linear infinite;">❄</div>
+        <div style="position: absolute; top: -15px; left: 55px; font-size: 14px; color: white; animation: snow 3.5s linear infinite;">❄</div>
+        <div style="position: absolute; top: -25px; left: 75px; font-size: 11px; color: white; animation: snow 2.8s linear infinite;">❄</div>
+      </div>
+    </div>
+
+    <!-- Lightning Animation -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 20px; border-radius: 15px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+      <div style="color: #f09819; font-size: 24px; margin-bottom: 10px;">⚡ Lightning</div>
+      <div style="height: 60px; width: 100px; position: relative; overflow: hidden; border-radius: 8px; background: linear-gradient(135deg, #0f2027, #203a43);">
+        <div style="position: absolute; top: 10px; left: 50px; font-size: 30px; color: #f09819; animation: flash 2s ease-in-out infinite;">⚡</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes fall {
+  0% { transform: translateY(-20px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(80px); opacity: 0; }
 }
 
-/* Snow Animation */
-.snow-flake {
-  animation: snow 3s linear infinite;
+@keyframes snow {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(80px) rotate(360deg); opacity: 0; }
 }
 
-/* Lightning Effects */
-.lightning {
-  animation: flash 0.5s ease-in-out;
+@keyframes flash {
+  0%, 90%, 100% { opacity: 0; transform: scale(1); }
+  5%, 85% { opacity: 1; transform: scale(1.2); }
 }
-```
+</style>
 
 ### 📈 **Interactive Charts**
 Powered by Chart.js for beautiful data visualization:
 
+<div align="center" style="margin: 20px 0;">
+  <div style="background: rgba(15, 32, 39, 0.8); padding: 30px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); max-width: 600px; margin: 0 auto;">
+    <div style="color: #00c6ff; font-size: 24px; margin-bottom: 20px;">📊 Temperature Trend</div>
+    
+    <!-- Animated Chart Bars -->
+    <div style="display: flex; align-items: end; justify-content: center; gap: 8px; height: 120px; margin-bottom: 20px;">
+      <div style="width: 30px; background: linear-gradient(to top, #00c6ff, #0072ff); border-radius: 4px 4px 0 0; animation: chartBar1 2s ease-out infinite;"></div>
+      <div style="width: 30px; background: linear-gradient(to top, #f09819, #edde5d); border-radius: 4px 4px 0 0; animation: chartBar2 2s ease-out infinite;"></div>
+      <div style="width: 30px; background: linear-gradient(to top, #2ecc71, #27ae60); border-radius: 4px 4px 0 0; animation: chartBar3 2s ease-out infinite;"></div>
+      <div style="width: 30px; background: linear-gradient(to top, #e74c3c, #c0392b); border-radius: 4px 4px 0 0; animation: chartBar4 2s ease-out infinite;"></div>
+      <div style="width: 30px; background: linear-gradient(to top, #9b59b6, #8e44ad); border-radius: 4px 4px 0 0; animation: chartBar5 2s ease-out infinite;"></div>
+      <div style="width: 30px; background: linear-gradient(to top, #00c6ff, #0072ff); border-radius: 4px 4px 0 0; animation: chartBar6 2s ease-out infinite;"></div>
+      <div style="width: 30px; background: linear-gradient(to top, #f09819, #edde5d); border-radius: 4px 4px 0 0; animation: chartBar7 2s ease-out infinite;"></div>
+    </div>
+    
+    <!-- Chart Labels -->
+    <div style="display: flex; justify-content: space-between; color: #a7b4c2; font-size: 12px;">
+      <span>Mon</span>
+      <span>Tue</span>
+      <span>Wed</span>
+      <span>Thu</span>
+      <span>Fri</span>
+      <span>Sat</span>
+      <span>Sun</span>
+    </div>
+    
+    <div style="margin-top: 15px; color: #f0f2f5; font-size: 14px;">
+      <span style="color: #00c6ff;">●</span> Temperature | 
+      <span style="color: #f09819;">●</span> Precipitation | 
+      <span style="color: #2ecc71;">●</span> Wind Speed
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes chartBar1 { 0% { height: 0; } 100% { height: 60px; } }
+@keyframes chartBar2 { 0% { height: 0; } 100% { height: 80px; } }
+@keyframes chartBar3 { 0% { height: 0; } 100% { height: 45px; } }
+@keyframes chartBar4 { 0% { height: 0; } 100% { height: 95px; } }
+@keyframes chartBar5 { 0% { height: 0; } 100% { height: 70px; } }
+@keyframes chartBar6 { 0% { height: 0; } 100% { height: 55px; } }
+@keyframes chartBar7 { 0% { height: 0; } 100% { height: 85px; } }
+</style>
+
 - **Temperature Trends**: 7-day historical data
-- **Precipitation Patterns**: Hourly rainfall predictions
+- **Precipitation Patterns**: Hourly rainfall predictions  
 - **Wind Speed Analysis**: Gust and average wind speeds
 - **Multi-city Comparison**: Side-by-side weather analysis
 
@@ -179,16 +261,43 @@ Integrated Leaflet.js with OpenWeatherMap tiles:
 ### 🎨 **Neumorphic Design**
 Modern glass morphism with depth and shadows:
 
-```css
-.neumorphic {
-  background: rgba(15, 32, 39, 0.8);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+<div align="center" style="margin: 20px 0;">
+  <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+    <!-- Interactive Neumorphic Card -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 25px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)'">
+      <div style="color: #00c6ff; font-size: 28px; margin-bottom: 10px;">🌤️</div>
+      <div style="color: #f0f2f5; font-weight: bold; margin-bottom: 5px;">Weather Card</div>
+      <div style="color: #a7b4c2; font-size: 14px;">Hover to see effect</div>
+    </div>
+
+    <!-- Animated Weather Icon -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 25px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);">
+      <div style="color: #f09819; font-size: 32px; margin-bottom: 10px; animation: pulse 2s ease-in-out infinite;">☀️</div>
+      <div style="color: #f0f2f5; font-weight: bold; margin-bottom: 5px;">Sunny Day</div>
+      <div style="color: #a7b4c2; font-size: 14px;">Pulsing animation</div>
+    </div>
+
+    <!-- Glass Effect Demo -->
+    <div style="background: rgba(15, 32, 39, 0.8); padding: 25px; border-radius: 20px; backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); animation: shimmer 3s ease-in-out infinite;"></div>
+      <div style="color: #2ecc71; font-size: 28px; margin-bottom: 10px; position: relative; z-index: 1;">🌱</div>
+      <div style="color: #f0f2f5; font-weight: bold; margin-bottom: 5px; position: relative; z-index: 1;">Fresh Air</div>
+      <div style="color: #a7b4c2; font-size: 14px; position: relative; z-index: 1;">Shimmer effect</div>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
 }
-```
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+</style>
 
 ---
 
