@@ -669,15 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sun.className = 'sun';
       container.appendChild(sun);
 
-      // moving clouds
-      for (let i = 0; i < 3; i += 1) {
-          const cl = document.createElement('div');
-          cl.className = 'cloud';
-          cl.style.top = `${10 + Math.random() * 25}vh`;
-          cl.style.animationDuration = `${24 + Math.random() * 16}s`;
-          cl.style.opacity = `${0.6 + Math.random() * 0.3}`;
-          container.appendChild(cl);
-      }
+      // Clouds disabled per request
   }
 
   function spawnStars(container) {
@@ -747,14 +739,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function spawnClouds(container, count = 5) {
-      for (let i = 0; i < count; i += 1) {
-          const cl = document.createElement('div');
-          cl.className = 'cloud cloud-dense';
-          cl.style.top = `${10 + Math.random() * 50}vh`;
-          cl.style.animationDuration = `${28 + Math.random() * 24}s`;
-          cl.style.opacity = `${0.75 + Math.random() * 0.2}`;
-          container.appendChild(cl);
-      }
+      // Disabled per request: do not create cloud overlays
+      return;
   }
 
   function buildHourlyTabs(data) {
@@ -961,15 +947,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function displayAlerts(data) {
       if (!alertsBanner) return;
-      const alerts = (data && data.alerts && data.alerts.alert) || [];
-      if (!alerts.length) { alertsBanner.style.display = 'none'; alertsBanner.innerHTML = ''; return; }
+      const all = (data && data.alerts && data.alerts.alert) || [];
+      const cityName = (data && data.location && data.location.name) || 'unknown';
+      const todayKey = new Date().toISOString().slice(0, 10);
+
+      // 1) De-duplicate by event + headline to avoid repeats from API
+      const deduped = [];
+      const seen = new Set();
+      for (const a of all) {
+          const uid = `${(a.event || 'Alert').trim()}|${(a.headline || '').trim()}`;
+          if (!seen.has(uid)) { seen.add(uid); deduped.push(a); }
+      }
+
+      // 2) Only show once per day per city
+      const toShow = deduped.filter(a => {
+          const key = `alertShown:${cityName}:${(a.event || 'Alert').trim()}:${todayKey}`;
+          return !localStorage.getItem(key);
+      });
+
+      if (!toShow.length) { alertsBanner.style.display = 'none'; alertsBanner.innerHTML = ''; return; }
+
       alertsBanner.style.display = 'block';
-      alertsBanner.innerHTML = alerts.map((a, idx) => `
+      alertsBanner.innerHTML = toShow.map((a, idx) => `
         <div class="alert-item">
           <span class="alert-title">${a.event || 'Alert'}</span>
           <span class="alert-area">${a.areas || ''}</span>
           <button class="alert-dismiss" data-idx="${idx}" aria-label="Dismiss alert">&times;</button>
         </div>`).join('');
+
+      // Mark as shown so refreshes don't re-add them today
+      try {
+          toShow.forEach(a => {
+              const key = `alertShown:${cityName}:${(a.event || 'Alert').trim()}:${todayKey}`;
+              localStorage.setItem(key, '1');
+          });
+      } catch {}
+
+      // Allow dismissing from UI
       alertsBanner.addEventListener('click', (e) => {
         if (e.target.classList.contains('alert-dismiss')) {
           const parent = e.target.closest('.alert-item');
@@ -1066,8 +1080,21 @@ document.addEventListener('DOMContentLoaded', () => {
       notifyUvToggle.checked = !!notificationsPrefs.uv;
 
       renderSavedCities();
-      const toFetch = qParam || lastSearchedCity;
-      fetchWeatherData(toFetch);
+      const fallbackQuery = qParam || lastSearchedCity;
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+              (position) => {
+                  const { latitude, longitude } = position.coords;
+                  fetchWeatherData(`${latitude},${longitude}`);
+              },
+              () => {
+                  fetchWeatherData(fallbackQuery);
+              },
+              { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+          );
+      } else {
+          fetchWeatherData(fallbackQuery);
+      }
       setupAutoRefresh();
       updateShareLinkState();
   }
@@ -1295,12 +1322,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (Notification.permission !== 'granted') return;
       const nowEpoch = Math.floor(Date.now() / 1000);
       const next2 = data.forecast.forecastday[0].hour.filter(h => h.time_epoch > nowEpoch).slice(0, 2);
+      const cityKey = (data && data.location && data.location.name) ? data.location.name : 'unknown';
+      const todayKey = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+
       if (notificationsPrefs.rain) {
           const rainSoon = next2.some(h => (h.will_it_rain || 0) === 1 || (h.chance_of_rain || 0) >= 60);
-          if (rainSoon) new Notification('Rain expected soon', { body: `Rain likely in ${data.location.name} within ~2 hours.` });
+          const key = `notif:${cityKey}:rain:${todayKey}`;
+          if (rainSoon && !localStorage.getItem(key)) {
+              new Notification('Rain expected soon', { body: `Rain likely in ${data.location.name} within ~2 hours.` });
+              try { localStorage.setItem(key, '1'); } catch {}
+          }
       }
       if (notificationsPrefs.uv && data.current.uv >= 7) {
-          new Notification('High UV index', { body: `UV is high (${data.current.uv}) in ${data.location.name}.` });
+          const key = `notif:${cityKey}:uv:${todayKey}`;
+          if (!localStorage.getItem(key)) {
+              new Notification('High UV index', { body: `UV is high (${data.current.uv}) in ${data.location.name}.` });
+              try { localStorage.setItem(key, '1'); } catch {}
+          }
       }
   }
 

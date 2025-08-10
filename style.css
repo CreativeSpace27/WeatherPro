@@ -668,28 +668,12 @@ main h2 {
 }
 
 .cloud {
-    position: fixed;
-    top: 15vh;
-    left: -20vw;
-    width: 220px;
-    height: 70px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50px;
-    box-shadow:
-        30px 10px 0 10px rgba(255, 255, 255, 0.9),
-        70px 15px 0 0 rgba(255, 255, 255, 0.9),
-        120px 0 0 10px rgba(255, 255, 255, 0.9);
-    animation: cloudDrift 30s linear infinite;
+    /* Hidden per request: disable cloud visuals entirely */
+    display: none !important;
 }
 
 .cloud.cloud-dense {
-    width: 320px;
-    height: 90px;
-    box-shadow:
-        30px 10px 0 10px rgba(255, 255, 255, 0.9),
-        70px 15px 0 0 rgba(255, 255, 255, 0.9),
-        120px 0 0 10px rgba(255, 255, 255, 0.9),
-        180px 10px 0 10px rgba(255, 255, 255, 0.85);
+    display: none !important;
 }
 
 @keyframes cloudDrift {
@@ -1130,6 +1114,7 @@ body.theme-night {
 .form-row { display: grid; gap: 8px; }
 .switch-label { display: inline-flex; align-items: center; gap: 8px; }
 .modal select, .modal input[type="number"], .modal input[type="text"] { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.08); color: var(--text-light); }
+.modal select option { background: rgba(20, 30, 40, 0.95); backdrop-filter: blur(12px); color: var(--text-light); padding: 8px; }
 
 /* Draggable saved cities visual cue */
 .saved-city-btn { user-select: none; }
