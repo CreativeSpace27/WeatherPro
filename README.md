@@ -94,6 +94,10 @@ This project was brought to life by *Hackathon Team CodeRanger*.
     </thead>
     <tbody>
         <tr>
+            <tr>
+            <td style="padding: 12px;">Piyush Bhadade</td>
+            <td style="padding: 12px;"><a href="https://github.com/CreativeSpace27">GitHub</a> | <a href="https://www.linkedin.com/in/piyush-bhadade-18718623b/">LinkedIn</a></td>
+        </tr>
             <td style="padding: 12px;">Kunal Baghele</td>
             <td style="padding: 12px;"><a href="https://github.com/KunalBagheleIT27">GitHub</a> | <a href="https://linkedin.com/in/kunalbaghele27/">LinkedIn</a></td>
         </tr>
@@ -101,10 +105,7 @@ This project was brought to life by *Hackathon Team CodeRanger*.
             <td style="padding: 12px;">Yash Gupta</td>
             <td style="padding: 12px;"><a href="https://github.com/maiyash">GitHub</a> | <a href="https://www.linkedin.com/in/maivyash/">LinkedIn</a></td>
         </tr>
-        <tr>
-            <td style="padding: 12px;">Piyush Bhadade</td>
-            <td style="padding: 12px;"><a href="https://github.com/CreativeSpace27">GitHub</a> | <a href="https://www.linkedin.com/in/piyush-bhadade-18718623b/">LinkedIn</a></td>
-        </tr>
+        
     </tbody>
 </table>
 
