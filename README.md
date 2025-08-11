@@ -1,289 +1,131 @@
 <div align="center">
-  <img src="https://img.shields.io/badge/WeatherPro-Advanced%20Weather%20App-blue?style=for-the-badge&logo=cloud&logoColor=white" alt="WeatherPro Badge">
-  <br>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-  <img src="https://img.shields.io/badge/API-WeatherAPI.com-green?style=for-the-badge&logo=api&logoColor=white" alt="API">
-  <img src="https://img.shields.io/badge/Map-Leaflet-brightgreen?style=for-the-badge&logo=map&logoColor=white" alt="Leaflet">
-  <br>
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License">
-  <img src="https://img.shields.io/badge/Version-2.0-blue?style=for-the-badge" alt="Version">
+
+<div style="border-radius: 15px; background: linear-gradient(45deg, #0f2027, #203a43, #2c5364); color: white; padding: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+    <h1 style="font-size: 60px; font-weight: bold; margin: 0; text-shadow: 2px 2px 4px #00000080;">
+        <span style="font-size: 72px; display: block; margin-bottom: 10px;">🌦</span>
+        WeatherPro
+    </h1>
+    <p style="font-size: 20px; color: #a7c0cd; margin-top: 10px;">
+        Not Just a Weather App. It's Your Personal Atmosphere Assistant.
+    </p>
 </div>
 
----
-
-<div align="center">
-  <h1>🌤️ WeatherPro</h1>
-  <p><strong>Your Professional Weather Assistant</strong></p>
-  <p>Advanced weather application with real-time data, interactive maps, and beautiful neumorphic UI</p>
-  
-  <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
-    <a href="#features" style="text-decoration: none;">
-      <button style="background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: transform 0.3s ease;">🚀 Features</button>
+<div style="margin-top: 25px; display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+    <a href="[YOUR_LIVE_DEMO_URL]" style="text-decoration: none; display: inline-block; padding: 15px 30px; font-size: 18px; font-weight: bold; color: white; background: linear-gradient(45deg, #1d976c, #93f9b9); border-radius: 50px; box-shadow: 0 5px 15px rgba(29, 151, 108, 0.4); transition: all 0.3s;">
+        🚀 LAUNCH LIVE DEMO
     </a>
-    <a href="#demo" style="text-decoration: none;">
-      <button style="background: linear-gradient(135deg, #f09819, #edde5d); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: transform 0.3s ease;">🎮 Live Demo</button>
+    <a href="[YOUR_GITHUB_REPO_URL]/issues" style="text-decoration: none; display: inline-block; padding: 15px 30px; font-size: 18px; font-weight: bold; color: white; background: linear-gradient(45deg, #d31027, #ea384d); border-radius: 50px; box-shadow: 0 5px 15px rgba(211, 16, 39, 0.4); transition: all 0.3s;">
+        🐞 REPORT A BUG
     </a>
-    <a href="#installation" style="text-decoration: none;">
-      <button style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: bold; transition: transform 0.3s ease;">⚡ Quick Start</button>
-    </a>
-  </div>
 </div>
-
----
-
-## ✨ Features Overview
-
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
-
-### 🌡️ **Real-Time Weather Data**
-- **Current Conditions**: Temperature, humidity, wind speed, UV index
-- **Air Quality**: Real-time AQI monitoring with detailed breakdown
-- **Pressure Trends**: Rising/falling pressure indicators
-- **Dew Point**: Calculated comfort metrics
-- **Moon Phase**: Lunar information with emoji representation
-
-### 📊 **Advanced Forecasting**
-- **Hourly Forecast**: 24-hour detailed predictions with sparkline charts
-- **Daily Forecast**: 7-day extended weather outlook
-- **Weather History**: 7-day historical data with interactive charts
-- **City Comparison**: Multi-city weather comparison feature
-- **Export Options**: CSV data export and image sharing
-
-### 🗺️ **Interactive Weather Map**
-- **Multiple Layers**: Radar, clouds, temperature overlays
-- **Real-time Updates**: Live weather data integration
-- **Search Functionality**: Location search on map
-- **Opacity Controls**: Adjustable layer transparency
-- **Responsive Design**: Works on all device sizes
-
-### 🎨 **Beautiful Neumorphic UI**
-- **Glass Morphism**: Modern glass-like interface elements
-- **Weather Animations**: Dynamic weather condition animations
-- **Theme Adaptation**: Automatic theme changes based on weather
-- **Accessibility**: Full ARIA support and keyboard navigation
-- **Responsive**: Mobile-first design approach
-
-### 🏃‍♂️ **Lifestyle Features**
-- **Activity Ratings**: Weather-based activity recommendations
-- **Allergy Alerts**: Pollen and air quality warnings
-- **Smart Suggestions**: Personalized weather advice
-- **Comfort Metrics**: Temperature and wind comfort indicators
-
-### ⚙️ **Advanced Settings**
-- **Unit Conversion**: Celsius/Fahrenheit toggle
-- **Language Support**: Multi-language interface
-- **Motion Reduction**: Accessibility-friendly animations
-- **Notifications**: Rain and UV alerts
-- **Preferences**: Customizable comfort thresholds
 
 </div>
 
 ---
 
-## 🎮 Live Demo
+### *💡 The Project Idea: Why WeatherPro?*
 
-<div align="center" style="margin: 40px 0;">
-  <div style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); padding: 30px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-    <h3 style="color: #00c6ff; margin-bottom: 20px;">🚀 Try WeatherPro Now!</h3>
-    <p style="color: #f0f2f5; margin-bottom: 25px;">Experience the power of professional weather forecasting</p>
-    <a href="https://your-demo-link.com" target="_blank" style="text-decoration: none;">
-      <button style="background: linear-gradient(135deg, #00c6ff, #0072ff); color: white; border: none; padding: 15px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 16px; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(0,198,255,0.3);">
-        🌟 Launch WeatherPro
-      </button>
-    </a>
-  </div>
-</div>
+In a world full of weather apps that just tell you if it's hot or cold, we saw a gap. The weather isn't just a number; it's a dynamic force that impacts our *lives, plans, health, and even culture. Standard weather apps are passive data points. **WeatherPro is an active lifestyle partner.*
+
+Our mission was to build a weather application that provides *context and actionable insights*. We wanted to answer questions like:
+* "Is today a good day for a run, considering my personal comfort temperature?"
+* "How does this week's weather compare to last week's?"
+* "What do the current atmospheric conditions mean for my allergies?"
+* "How can I visualize the incoming rain on a live map?"
+
+WeatherPro was born from the idea that a weather app should be as dynamic, deep, and personal as the weather itself.
 
 ---
 
-## 🛠️ Installation & Setup
+### *🌟 Our Uniqueness: What Makes Us Different?*
 
-### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- Internet connection for API calls
-- WeatherAPI.com account (free tier available)
+We're not just another weather app. Here’s why WeatherPro stands in a class of its own:
 
-### Quick Start
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/WeatherPro.git
-   cd WeatherPro
-   ```
-
-2. **Get API Keys**
-   - Sign up at [WeatherAPI.com](https://www.weatherapi.com/) (free tier)
-   - Get your API key from the dashboard
-   - Update the API key in `script.js`:
-   ```javascript
-   const API_KEY = "your-api-key-here";
-   ```
-
-
-4. **Access the app**
-   - Open your browser and navigate to `http://localhost:8000`
-   - Or double-click `index.html` to open directly
-
----
-
-## 🎯 Key Features Deep Dive
-
-<style>
-@keyframes fall {
-  0% { transform: translateY(-20px); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(80px); opacity: 0; }
-}
-
-@keyframes snow {
-  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(80px) rotate(360deg); opacity: 0; }
-}
-
-@keyframes flash {
-  0%, 90%, 100% { opacity: 0; transform: scale(1); }
-  5%, 85% { opacity: 1; transform: scale(1.2); }
-}
-</style>
-
-### 📈 **Interactive Charts**
-Powered by Chart.js for beautiful data visualization:
-
-- **Temperature Trends**: 7-day historical data
-- **Precipitation Patterns**: Hourly rainfall predictions
-- **Wind Speed Analysis**: Gust and average wind speeds
-- **Multi-city Comparison**: Side-by-side weather analysis
-
-### 🗺️ **Advanced Mapping**
-Integrated Leaflet.js with OpenWeatherMap tiles:
-
-- **Radar Layer**: Real-time precipitation radar
-- **Cloud Layer**: Cloud coverage visualization
-- **Temperature Layer**: Heat map temperature display
-- **Interactive Controls**: Layer switching and opacity adjustment
+<table width="100%" style="border: none; border-collapse: collapse;">
+    <tr style="background: none;">
+        <td align="center" style="padding: 20px; width: 50%;">
+            <div style="font-size: 52px;">📊</div>
+            <h3 style="color: #2c3e50;">Historical Data & Comparison</h3>
+            <p style="color: #34495e;">Most apps show the future. We let you analyze the past. Our interactive chart visualizes the last 7 days of weather and allows you to *compare weather patterns between multiple cities*, a feature almost unheard of in free weather web apps.</p>
+        </td>
+        <td align="center" style="padding: 20px; width: 50%;">
+            <div style="font-size: 52px;">🌿</div>
+            <h3 style="color: #2c3e50;">Lifestyle & Health Integration</h3>
+            <p style="color: #34495e;">WeatherPro connects the weather to your well-being. It provides personalized ratings for outdoor activities and crucial allergy information, turning abstract data into practical daily advice.</p>
+        </td>
+    </tr>
+    <tr style="background: none;">
+        <td align="center" style="padding: 20px; width: 50%;">
+            <div style="font-size: 52px;">🗺</div>
+            <h3 style="color: #2c3e50;">Fully Interactive Map Layers</h3>
+            <p style="color: #34495e;">While others use static images, we integrate a powerful, live map from Windy.com. You can toggle layers for Radar, Clouds, and Temperature, control opacity, and explore weather systems in real-time.</p>
+        </td>
+        <td align="center" style="padding: 20px; width: 50%;">
+            <div style="font-size: 52px;">🇮🇳</div>
+            <h3 style="color: #2c3e50;">Cultural Relevance with Panchang</h3>
+            <p style="color: #34495e;">We believe in inclusivity. The dedicated *Hindi Panchang* section, calculating Tithi, Month, and Year, is a unique feature that serves the cultural needs of millions of users, a detail often overlooked by global apps.</p>
+        </td>
+    </tr>
+</table>
 
 ---
 
-## 🔧 Configuration
+### *🚀 Core Features: A Detailed Look*
 
-### API Configuration
-```javascript
-// WeatherAPI.com configuration
-const API_KEY = "your-api-key";
-const BASE_URL = "https://api.weatherapi.com/v1";
-
-// OpenWeatherMap for map tiles
-const OPENWEATHER_MAP_KEY = "your-map-key";
-```
-
-### Customization Options
-- **Theme Colors**: Modify CSS variables in `style.css`
-- **Animation Speed**: Adjust animation durations
-- **Default Location**: Set preferred default city
-- **Language**: Add new language support
-- **Units**: Configure default temperature units
+* *Real-time Dashboard:* Get instant, accurate data on temperature, humidity, wind speed, pressure, and sunrise/sunset times with a "feels like" index.
+* *Hourly & Daily Forecasts:* A beautiful, tabbed hourly forecast (with sparkline chart) and a detailed 7-day+ daily forecast.
+* *PWA Ready:* Installable as a Progressive Web App for a native, offline-capable experience on any device.
+* *Neumorphic UI:* A stunning, modern "soft UI" design that's accessible and easy on the eyes.
+* *Deep Personalization:* A comprehensive settings modal to control units (C/F), language, notifications, and activity preferences.
+* *Shareable Content:* Instantly share a direct link to a city's weather or export charts as a CSV file or an image.
 
 ---
 
-## 📱 Responsive Design
+### *👨‍💻 The Development Team*
 
-WeatherPro is built with a mobile-first approach:
+This project was brought to life by *Hackathon Team CodeRanger*.
 
-- **Desktop**: Full-featured interface with all controls
-- **Tablet**: Optimized layout with touch-friendly controls
-- **Mobile**: Streamlined interface with essential features
-- **Accessibility**: Full ARIA support and keyboard navigation
-
----
-
-## 🌍 Internationalization
-
-Currently supports:
-- 🇺🇸 English
-- 🇪🇸 Español
-- 🇫🇷 Français
-- 🇩🇪 Deutsch
-- 🇮🇳 हिन्दी
-
-Adding new languages is simple - just extend the language object in the JavaScript code.
-
----
-
-## 🔒 Privacy & Security
-
-- **No Data Storage**: Weather data is not permanently stored
-- **Local Storage**: Only user preferences are saved locally
-- **HTTPS Only**: Secure API communications
-- **No Tracking**: No analytics or tracking scripts
+<table width="100%" style="border: 1px solid #ddd; border-collapse: collapse; margin-top: 1em;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 12px; text-align: left;">Team Member</th>
+            <th style="padding: 12px; text-align: left;">Connect</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="padding: 12px;">Kunal Baghele</td>
+            <td style="padding: 12px;"><a href="https://github.com/KunalBagheleIT27">GitHub</a> | <a href="https://linkedin.com/in/kunalbaghele27/">LinkedIn</a></td>
+        </tr>
+        <tr>
+            <td style="padding: 12px;">Yash Gupta</td>
+            <td style="padding: 12px;"><a href="https://github.com/maiyash">GitHub</a> | <a href="https://www.linkedin.com/in/maivyash/">LinkedIn</a></td>
+        </tr>
+        <tr>
+            <td style="padding: 12px;">Piyush Bhadade</td>
+            <td style="padding: 12px;"><a href="https://github.com/CreativeSpace27">GitHub</a> | <a href="https://www.linkedin.com/in/piyush-bhadade-18718623b/">LinkedIn</a></td>
+        </tr>
+    </tbody>
+</table>
 
 ---
 
-## 🤝 Contributing
+### *💻 Technology Stack & APIs*
 
-We welcome contributions! Here's how you can help:
+WeatherPro is built on a foundation of modern, robust, and open-source technologies.
 
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
-3. **Commit your changes**: `git commit -m 'Add amazing feature'`
-4. **Push to the branch**: `git push origin feature/amazing-feature`
-5. **Open a Pull Request**
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
+![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=leaflet&logoColor=white)
+![Font Awesome](https://img.shields.io/badge/Font%20Awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white)
+![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
+![OpenWeatherMap](https://img.shields.io/badge/OpenWeather-EB6E4B?style=for-the-badge&logo=openweathermap&logoColor=white)
+![Windy.com](https://img.shields.io/badge/Windy.com-0074D9?style=for-the-badge)
 
-### Development Guidelines
-- Follow existing code style
-- Add comments for complex logic
-- Test on multiple browsers
-- Ensure accessibility compliance
-- Update documentation as needed
 
----
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- **WeatherAPI.com** for reliable weather data
-- **OpenWeatherMap** for map tiles
-- **Leaflet.js** for interactive mapping
-- **Chart.js** for data visualization
-- **Font Awesome** for beautiful icons
-- **SunCalc** for astronomical calculations
-
----
-
-## 📞 Support
-
-- **Issues**: [GitHub Issues](https://github.com/yourusername/WeatherPro/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/WeatherPro/discussions)
-- **Email**: support@weatherpro.app
-
----
-
-<div align="center" style="margin: 40px 0;">
-  <p style="color: #a7b4c2; font-size: 14px;">
-    Made with ❤️ by the WeatherPro Team
-  </p>
-  <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
-    <a href="#" style="color: #00c6ff; text-decoration: none;">🌐 Website</a>
-    <a href="#" style="color: #00c6ff; text-decoration: none;">📧 Contact</a>
-    <a href="#" style="color: #00c6ff; text-decoration: none;">🐛 Report Bug</a>
-    <a href="#" style="color: #00c6ff; text-decoration: none;">💡 Request Feature</a>
-  </div>
-</div>
-
----
-
-<div align="center">
-  <img src="https://img.shields.io/github/stars/yourusername/WeatherPro?style=social" alt="Stars">
-  <img src="https://img.shields.io/github/forks/yourusername/WeatherPro?style=social" alt="Forks">
-  <img src="https://img.shields.io/github/issues/yourusername/WeatherPro" alt="Issues">
-  <img src="https://img.shields.io/github/license/yourusername/WeatherPro" alt="License">
+<div align="center" style="margin-top: 30px; font-size: 14px; color: #555;">
+    Made with ❤ by Hackathon Team <strong>CodeRanger</strong>
 </div>
